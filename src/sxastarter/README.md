@@ -1,4 +1,17 @@
-# Sitecore JSS Next.js Sample Application
+# Rendering Host Project
 
+This Visual Studio / MSBuild project is an independently running ASP.NET Core
+application which uses the Sitecore ASP.NET Core Rendering SDK to create a
+*rendering host*. An ASP.NET Core *rendering host* uses Web APIs to obtain
+Sitecore content and page layout, and implements components to render
+those pages. See the Sitecore ASP.NET Core Rendering SDK documentation for more information.
 
-[Documentation](https://doc.sitecore.com/xp/en/developers/hd/200/sitecore-headless-development/sitecore-javascript-rendering-sdk--jss--for-next-js.html).
+The Docker image for this rendering host uses `dotnet watch` during
+development, so changes to this code should automatically be available for
+test/preview at [www.renderinghost.localhost](https://www.renderinghost.localhost).
+Be sure to watch the `rendering` container logs for compilation errors. To debug, you
+can attach to the `ProjectName.1.exe` process inside the `rendering` container.
+
+You can also run and debug the Rendering Host directly from Visual Studio (F5). However
+keep in mind that the Sitecore Experience Editor is configured to utilize the
+container-based Rendering Host.
