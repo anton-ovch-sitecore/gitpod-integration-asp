@@ -18,6 +18,18 @@ tasks:
       -H 'Content-Type: application/json' \
       -d '{"ideId":"'${ide_id}'","userEmail": "'$(git config user.email)'","workspaceUrl": "'${workspace_url}'","renderingHostPublicUrl":  "'${rendering_host_public_url}'"}'
       echo "Workspace registration finished in XMCloud..."
+  - name: Restore & Build
+    init: |
+      dotnet dev-certs https 
+      dotnet restore
+      dotnet build
+  - name: Run   
     command: |
       echo "Starting rendering host"
       dotnet run
+ports:
+  - name: Rendering Host
+    description: Rendering Host public port
+    port: 3000
+    onOpen: open-browser   
+    visibility : public
