@@ -3,6 +3,7 @@ image: gitpod/workspace-dotnet
 tasks: 
   - name: Start Rendering Host
   - before: |
+      echo "BEFORE STEP"
       eval $(gp env -e LayoutService__Handler__Uri='$(printenv GRAPH_QL_ENDPOINT)')
       eval $(gp env -e LayoutService__Handler__RequestDefaults__sc_apikey='$(printenv SITECORE_API_KEY)')
       eval $(gp env -e LayoutService__Handler__RequestDefaults__sc_site=sxastarter)
@@ -19,10 +20,12 @@ tasks:
       -d '{"ideId":"'${ide_id}'","userEmail": "'$(git config user.email)'","workspaceUrl": "'${workspace_url}'","renderingHostPublicUrl":  "'${rendering_host_public_url}'"}'
       echo "Workspace registration finished in XMCloud..."  
     init: |
+      echo "INIT STEP"
       dotnet dev-certs https 
       dotnet restore
       dotnet build
     command: |
+      echo "COMMAND STEP"
       echo "Starting rendering host"
       dotnet run
 ports:
