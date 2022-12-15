@@ -17,8 +17,7 @@ tasks:
       curl -0 -v -X POST https://sitecoreservicescloudidegitpodregistration.azurewebsites.net/api/v1/workspace \
       -H 'Content-Type: application/json' \
       -d '{"ideId":"'${ide_id}'","userEmail": "'$(git config user.email)'","workspaceUrl": "'${workspace_url}'","renderingHostPublicUrl":  "'${rendering_host_public_url}'"}'
-      echo "Workspace registration finished in XMCloud..."
-  - name: Run   
+      echo "Workspace registration finished in XMCloud..."  
     command: |
       echo "Starting rendering host"
       dotnet run
