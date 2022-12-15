@@ -3,7 +3,7 @@
   <PropertyGroup>
     <LangVersion>8.0</LangVersion>
     <Nullable>enable</Nullable>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <NoWarn>$(NoWarn);CS1591</NoWarn>
     <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
     <DockerfileContext>..\..\..\..\..</DockerfileContext>
