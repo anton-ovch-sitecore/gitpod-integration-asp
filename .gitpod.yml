@@ -4,7 +4,7 @@ tasks:
   - name: Start Rendering Host
   - before: |
       eval $(gp env -e LayoutService__Handler__Uri='$(printenv GRAPH_QL_ENDPOINT)'})
-      eval $(gp env -e LayoutService__Handler__RequestDefaults__sc_apikey='$(printenv SITECORE_API_KEY)'})
+      eval $(gp env -e LayoutService__Handler__RequestDefaults__sc_apikey='$(printenv SITECORE_API_KEY)')
       eval $(gp env -e LayoutService__Handler__RequestDefaults__sc_site=sxastarter})
 
       rendering_host_path=$(jq -r .renderingHosts.xmcloudpreview.path  xmcloud.build.json)
