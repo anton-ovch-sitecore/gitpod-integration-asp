@@ -8,7 +8,7 @@ namespace RenderingHost.Controllers
     {
         public IActionResult Index([SitecoreRouteField] Field<string> pageTitle)
         {
-            ViewBag.Title = pageTitle.Value;
+            ViewBag.Title = pageTitle?.Value;
 
             return View();
         }

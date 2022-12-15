@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using Sitecore.AspNet.ExperienceEditor;
 using System.Linq;
+using Sitecore.AspNet.Styleguide.Models;
 
 namespace RenderingHost
 {
@@ -41,6 +42,11 @@ namespace RenderingHost
             var apiKey = handler.RequestDefaults?.FirstOrDefault(x => x.Key == "sc_apikey").Value.ToString();
             var siteName =handler.RequestDefaults?.FirstOrDefault(x => x.Key == "sc_site").Value.ToString();
 
+            foreach (var kvp in handler.RequestDefaults)
+            {
+                Console.WriteLine("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
+            }
+
             if (apiKey != null && siteName != null)
             {
                 services
@@ -55,6 +61,7 @@ namespace RenderingHost
                         .AddPartialView("Styleguide-Layout", "_StyleguideLayout")
                         .AddPartialView("GraphQL-Layout", "_GraphQLLayout")
                         .AddModelBoundView<ContentBlock>("ContentBlock")
+                        .AddModelBoundView<PageContent>("PageContent")
                         .AddModelBoundView<HeadingAndDescription>("Styleguide-ComponentParams")
                         .AddModelBoundView<CustomRouteType>("Styleguide-CustomRouteType")
                         .AddModelBoundView<FieldUsageCheckbox>("Styleguide-FieldUsage-Checkbox")
