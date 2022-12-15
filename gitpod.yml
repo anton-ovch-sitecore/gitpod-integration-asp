@@ -1,0 +1,24 @@
+image: gitpod/workspace-dotnet
+
+tasks: 
+  - name: Start Rendering Host
+  - before: |
+      eval $(gp env -e LayoutService__Handler__Uri='$(printenv GRAPH_QL_ENDPOINT)'})
+      eval $(gp env -e LayoutService__Handler__RequestDefaults__sc_apikey='$(printenv SITECORE_API_KEY)'})
+      eval $(gp env -e LayoutService__Handler__RequestDefaults__sc_site=sxastarter})
+
+      rendering_host_path=$(jq -r .renderingHosts.xmcloudpreview.path  xmcloud.build.json)
+      cd ${rendering_host_path}
+      echo "Workspace registration starting in XMCloud..."
+      ide_id=$(printenv IDE_ID)
+      workspace_url=$(gp url)
+      rendering_host_public_url="${workspace_url/https:'//'/https://"3000-"}"
+      eval $(gp env -e PUBLIC_URL=${rendering_host_public_url})
+      curl -0 -v -X POST https://sitecoreservicescloudidegitpodregistration.azurewebsites.net/api/v1/workspace \
+      -H 'Content-Type: application/json' \
+      -d '{"ideId":"'${ide_id}'","userEmail": "'$(git config user.email)'","workspaceUrl": "'${workspace_url}'","renderingHostPublicUrl":  "'${rendering_host_public_url}'"}'
+      echo "Workspace registration finished in XMCloud..."
+    init: npm install
+    command: |
+      echo "Starting rendering host"
+      dotnet run
