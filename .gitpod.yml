@@ -24,6 +24,6 @@ tasks:
 ports:
   - name: Rendering Host
     description: Rendering Host public port
-    port: 3000
+    port: 5000
     onOpen: open-browser   
     visibility : public
